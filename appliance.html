@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Household Appliance Power Tracker</title>
+<style>
+    body { 
+        font-family: Arial, sans-serif; 
+        margin: 20px; 
+        background-color: #e6f0ff;  /* light blue background */
+        color: #003366;              /* dark blue text */
+    }
+
+    h2, h3 {
+        color: #004080;              /* deeper blue headings */
+    }
+
+    table { 
+        border-collapse: collapse; 
+        width: 100%; 
+        margin-bottom: 20px; 
+        background-color: #ffffff;  /* white table background for contrast */
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1); /* subtle shadow */
+    }
+
+    th, td { 
+        border: 1px solid #99ccff;  /* soft blue border */
+        padding: 8px; 
+        text-align: center; 
+    }
+
+    th { 
+        background-color: #cce0ff;  /* light blue header */
+        color: #003366;
+    }
+
+    input, select, button { 
+        margin: 5px; 
+        padding: 6px 10px; 
+        border: 1px solid #99ccff;
+        border-radius: 4px;
+        font-size: 14px;
+    }
+
+    input:focus, select:focus {
+        outline: none;
+        border-color: #3399ff;
+        box-shadow: 0 0 5px #3399ff;
+    }
+
+    button {
+        background-color: #3399ff;
+        color: white;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    button:hover {
+        background-color: #0073e6;
+    }
+
+    .add-form {
+        margin-bottom: 20px;
+        background-color: #cce0ff;
+        padding: 10px;
+        border-radius: 6px;
+    }
+</style>>
+</head>
+<body>
+
+<h2>Household Appliance Power Tracker</h2>
+
+<label for="categorySelect">Select Category:</label>
+<select id="categorySelect"></select>
+
+<h3>Appliances in this Category</h3>
+<table id="applianceTable">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Power (W)</th>
+            <th>Usage Time (h)</th>
+            <th>Energy Used (kWh)</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+    <tfoot>
+        <tr>
+            <th>Average</th>
+            <th id="avgPower">-</th>
+            <th id="totalHours">-</th>
+            <th id="totalEnergy">-</th>
+        </tr>
+    </tfoot>
+</table>
+
+<h3>Add New Appliance to This Category</h3>
+<div class="add-form">
+    <input type="text" id="newName" placeholder="Appliance Name">
+    <input type="number" id="newPower" placeholder="Power (W)">
+    <input type="number" id="newHours" placeholder="Usage (h)">
+    <button id="addApplianceBtn">Add Appliance</button>
+</div>
+
+<script>
+// Categories and default appliances
+const categories = {
+    "High Power": [
+        { name: "Air Conditioner", power: 2000, hours: 5 },
+        { name: "Water Heater", power: 3000, hours: 2 }
+    ],
+    "Medium Power": [
+        { name: "Refrigerator", power: 150, hours: 24 },
+        { name: "Microwave", power: 800, hours: 1 }
+    ],
+    "Low Power": [
+        { name: "LED Light", power: 10, hours: 6 },
+        { name: "Fan", power: 75, hours: 5 }
+    ],
+    "Usually Used": [
+        { name: "Washing Machine", power: 500, hours: 1 },
+        { name: "Refrigerator", power: 150, hours: 24 },
+        { name: "Microwave Oven", power: 800, hours: 1 },
+        { name: "Oven", power: 1000, hours: 1.5 },
+        { name: "Induction Cooker", power: 1800, hours: 1 }
+    ],
+    "Online Devices": [
+        { name: "WiFi Router", power: 20, hours: 24 },
+        { name: "Smart TV", power: 150, hours: 3 }
+    ]
+};
+
+// Populate category dropdown
+const categorySelect = document.getElementById("categorySelect");
+Object.keys(categories).forEach(cat => {
+    const option = document.createElement("option");
+    option.value = cat;
+    option.textContent = cat;
+    categorySelect.appendChild(option);
+});
+
+// Display appliances for selected category
+function displayCategory(category) {
+    const tbody = document.querySelector("#applianceTable tbody");
+    tbody.innerHTML = "";
+    const appliances = categories[category];
+
+    let totalPower = 0, totalHours = 0, totalEnergy = 0;
+
+    appliances.forEach((appliance, index) => {
+        const row = document.createElement("tr");
+
+        // Name
+        const nameCell = document.createElement("td");
+        nameCell.textContent = appliance.name;
+        row.appendChild(nameCell);
+
+        // Power (editable)
+        const powerCell = document.createElement("td");
+        const powerInput = document.createElement("input");
+        powerInput.type = "number";
+        powerInput.value = appliance.power;
+        powerInput.oninput = e => {
+            appliance.power = parseFloat(e.target.value);
+            updateFooter(appliances);
+        };
+        powerCell.appendChild(powerInput);
+        row.appendChild(powerCell);
+
+        // Usage time (editable)
+        const hoursCell = document.createElement("td");
+        const hoursInput = document.createElement("input");
+        hoursInput.type = "number";
+        hoursInput.value = appliance.hours;
+        hoursInput.oninput = e => {
+            appliance.hours = parseFloat(e.target.value);
+            updateFooter(appliances);
+        };
+        hoursCell.appendChild(hoursInput);
+        row.appendChild(hoursCell);
+
+        // Energy used
+        const energyCell = document.createElement("td");
+        const energy = (appliance.power * appliance.hours) / 1000;
+        energyCell.textContent = energy.toFixed(2);
+        row.appendChild(energyCell);
+
+        tbody.appendChild(row);
+
+        totalPower += appliance.power;
+        totalHours += appliance.hours;
+        totalEnergy += energy;
+    });
+
+    document.getElementById("avgPower").textContent = (totalPower / appliances.length).toFixed(2);
+    document.getElementById("totalHours").textContent = totalHours.toFixed(2);
+    document.getElementById("totalEnergy").textContent = totalEnergy.toFixed(2);
+}
+
+// Update footer after edits
+function updateFooter(appliances) {
+    let totalPower = 0, totalHours = 0, totalEnergy = 0;
+    appliances.forEach(a => {
+        totalPower += a.power;
+        totalHours += a.hours;
+        totalEnergy += (a.power * a.hours)/1000;
+    });
+    document.getElementById("avgPower").textContent = (totalPower / appliances.length).toFixed(2);
+    document.getElementById("totalHours").textContent = totalHours.toFixed(2);
+    document.getElementById("totalEnergy").textContent = totalEnergy.toFixed(2);
+
+    const rows = document.querySelectorAll("#applianceTable tbody tr");
+    rows.forEach((row, i) => {
+        row.cells[3].textContent = ((appliances[i].power * appliances[i].hours)/1000).toFixed(2);
+    });
+}
+
+// Add new appliance to currently selected category
+document.getElementById("addApplianceBtn").addEventListener("click", () => {
+    const name = document.getElementById("newName").value.trim();
+    const power = parseFloat(document.getElementById("newPower").value);
+    const hours = parseFloat(document.getElementById("newHours").value);
+
+    if (!name || isNaN(power) || isNaN(hours)) {
+        alert("Please enter valid values for all fields.");
+        return;
+    }
+
+    const selectedCategory = categorySelect.value;
+    categories[selectedCategory].push({ name, power, hours });
+
+    // Clear inputs
+    document.getElementById("newName").value = "";
+    document.getElementById("newPower").value = "";
+    document.getElementById("newHours").value = "";
+
+    displayCategory(selectedCategory);
+});
+
+// Event listener for category change
+categorySelect.addEventListener("change", () => displayCategory(categorySelect.value));
+
+// Initial display
+categorySelect.value = "Usually Used";
+displayCategory(categorySelect.value);
+</script>
+
+</body>
+</html>

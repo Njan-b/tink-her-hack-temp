@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Electricity Meter OCR Billing</title>
+<script src="https://cdn.jsdelivr.net/npm/tesseract.js@4.2.1/dist/tesseract.min.js"></script>
+<style>
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: #f4f7f8;
+        margin: 0; padding: 20px;
+        display: flex; flex-direction: column; align-items: center;
+        color: #333;
+    }
+    h1 { color: #0d6efd; margin-bottom: 20px; }
+    .card {
+        background: #fff; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        padding: 25px; max-width: 450px; width: 100%; text-align: center; margin-bottom: 20px;
+    }
+    video { width: 100%; border-radius: 12px; border: 2px solid #0d6efd; margin-bottom: 10px; }
+    button {
+        background-color: #0d6efd; color: white; padding: 12px 20px; border-radius: 8px;
+        border: none; cursor: pointer; font-weight: bold; margin: 10px 0;
+        transition: background 0.3s;
+    }
+    button:hover { background-color: #0956c7; }
+    img { width: 100%; border-radius: 12px; margin-top: 15px; border: 2px solid #0d6efd; display: none;}
+    .result p {
+        background: #f1f5f9; border-left: 5px solid #0d6efd; padding: 10px 15px; border-radius: 8px;
+        font-size: 16px; margin: 10px 0; transition: background 0.3s;
+    }
+    .result p span { font-weight: bold; color: #0d6efd; font-size: 18px; }
+    .result p:hover { background: #e6f0ff; }
+</style>
+</head>
+<body>
+
+<h1>⚡ Electricity Meter OCR Billing</h1>
+
+<div class="card">
+    <video id="video" autoplay></video>
+    <br>
+    <button id="captureBtn">📸 Capture Current Reading</button>
+    <img id="preview" alt="Captured Image Preview">
+    
+    <div class="result">
+        <p>Previous Reading: <span id="prevReading">0</span></p>
+        <p>Current Reading: <span id="currReading">0</span></p>
+        <p>Units Consumed: <span id="unitsConsumed">0</span></p>
+        <p>Electricity Bill: ₹<span id="billAmount">0</span></p>
+    </div>
+</div>
+
+<canvas id="canvas" style="display:none;"></canvas>
+
+<script>
+const video = document.getElementById("video");
+const captureBtn = document.getElementById("captureBtn");
+const preview = document.getElementById("preview");
+const canvas = document.getElementById("canvas");
+
+const prevReadingEl = document.getElementById("prevReading");
+const currReadingEl = document.getElementById("currReading");
+const unitsConsumedEl = document.getElementById("unitsConsumed");
+const billAmountEl = document.getElementById("billAmount");
+
+// Load previous image reading from localStorage
+let prevReading = parseInt(localStorage.getItem("prevReading")) || 0;
+prevReadingEl.textContent = prevReading;
+
+// Access camera
+navigator.mediaDevices.getUserMedia({ video: true })
+.then(stream => { video.srcObject = stream; })
+.catch(err => alert("Camera access denied: " + err));
+
+// Capture photo and read current reading
+captureBtn.addEventListener("click", async () => {
+    // Draw video frame to canvas
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+    const ctx = canvas.getContext("2d");
+    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+    const imgData = canvas.toDataURL("image/png");
+    preview.src = imgData;
+    preview.style.display = "block";
+
+    // Store captured image for next time
+    localStorage.setItem("lastMeterImage", imgData);
+
+    // Get current reading using Tesseract OCR
+    const currReading = await extractReading(imgData);
+    currReadingEl.textContent = currReading;
+
+    // Calculate units
+    let units = currReading - prevReading;
+    unitsConsumedEl.textContent = units > 0 ? units : 0;
+
+    // Example bill rate ₹5/unit
+    let bill = units > 0 ? units * 5 : 0;
+    billAmountEl.textContent = bill;
+
+    // Update previous reading for next capture
+    localStorage.setItem("prevReading", currReading);
+    prevReadingEl.textContent = prevReading;
+    prevReading = currReading;
+});
+
+// OCR function using Tesseract.js
+async function extractReading(imgData) {
+    const result = await Tesseract.recognize(imgData, 'eng', { logger: m => console.log(m) });
+    let text = result.data.text.replace(/\D/g,''); // Keep only digits
+    return parseInt(text) || 0;
+}
+</script>
+
+</body>
+</html>
