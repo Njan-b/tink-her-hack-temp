@@ -13,7 +13,7 @@
 - Member 2: DHRISHYA DAS P H - College of Engineering, Trivandrum
 
 ### Hosted Project Link
-[mention your project hosted link here]
+https://njan-b.github.io/tink-her-hack-temp/
 
 ### Project Description
 Smart Electricity Assistant is a web application that helps users track their electricity usage, estimate bills, and identify high-consumption appliances. It provides options to scan the meter, enter readings manually, or monitor appliance-wise usage, helping reduce energy waste and manage electricity efficiently.
@@ -54,21 +54,25 @@ The project uses HTML, CSS, and JavaScript to create a web app with pages for me
 
 #### Screenshots
 
-![https://1drv.ms/i/c/621a4d1980988d71/IQDEe5WxKat7T5ZALCHoYecoAQULT_EHyHhNoT1SD_kpo64?e=0HXPrT](open interface)
+![https://1drv.ms/i/c/621a4d1980988d71/IQDEe5WxKat7T5ZALCHoYecoAQULT_EHyHhNoT1SD_kpo64?e=0HXPrT] (open interface)
 
-![https://1drv.ms/i/c/621a4d1980988d71/IQD0rGkYYAxKS4-k6RbiHtbZASKO1pCp96yG7J1Nb96EPCE?e=2zRxQd](scan meter)
+![https://1drv.ms/i/c/621a4d1980988d71/IQD0rGkYYAxKS4-k6RbiHtbZASKO1pCp96yG7J1Nb96EPCE?e=2zRxQd] (scan meter)
 
-![https://1drv.ms/i/c/621a4d1980988d71/IQA41eCP5xjGQIYeb2_dIq8PAbiEgLUyGdnsOEPWikEuWyI?e=iPMSyx](manual entry)
+![https://1drv.ms/i/c/621a4d1980988d71/IQA41eCP5xjGQIYeb2_dIq8PAbiEgLUyGdnsOEPWikEuWyI?e=iPMSyx] (manual entry)
 
-![https://1drv.ms/i/c/621a4d1980988d71/IQDy6DEKV6bHQJOxsGCpEWKGAVrehGgym9Y8wOb0FlLXd-E?e=9R8nhy](appliance usage)
+![https://1drv.ms/i/c/621a4d1980988d71/IQDy6DEKV6bHQJOxsGCpEWKGAVrehGgym9Y8wOb0FlLXd-E?e=9R8nhy] (appliance usage)
+
+### DEMO VIDEO
+
+https://youtu.be/0NIVKwOQzYI?si=bLBpMXFqn89vV0ao
 
 ## WORK DISTRIBUTION
 
 GANGA DAMODARAN K- FRONTEND
 DHRSHYA DAS P H- BACKEND
 
+THANK YOU!
 
-**Base URL:** `https://api.yourproject.com`
 
 
 
