@@ -2,140 +2,66 @@
   <img src="./img.png" alt="Project Banner" width="100%">
 </p>
 
-# [Project Name] 🎯
+# [SMART ELECTRICITY ASSISTANT] 🎯
 
 ## Basic Details
 
-### Team Name: [Name]
+### Team Name: [VELORA]
 
 ### Team Members
-- Member 1: [Name] - [College]
-- Member 2: [Name] - [College]
+- Member 1: [GANGA DAMODARAN K] - [College of Engineering, Trivandrum]
+- Member 2: [DHRISHYA DAS P H] - [College of Engineering, Trivandrum]
 
 ### Hosted Project Link
 [mention your project hosted link here]
 
 ### Project Description
-[2-3 lines about what your project does]
+[Smart Electricity Assistant is a web application that helps users track their electricity usage, estimate bills, and identify high-consumption appliances. It provides options to scan the meter, enter readings manually, or monitor appliance-wise usage, helping reduce energy waste and manage electricity efficiently.]
 
 ### The Problem statement
-[What problem are you solving?]
+[Many households struggle to monitor their electricity consumption, estimate monthly bills, and identify which appliances use the most power. The lack of an easy-to-use tool leads to higher energy costs and inefficient electricity usage. This project aims to provide a smart solution that tracks usage, calculates bills, and helps users reduce energy waste.]
 
 ### The Solution
-[How are you solving it?]
+[The Smart Electricity Assistant provides an interactive web application where users can scan their electricity meter, enter readings manually, or monitor appliance-wise consumption. It automatically calculates estimated bills, highlights high-energy-consuming appliances, and gives insights to reduce electricity wastage, helping users save money and energy efficiently.]
 
 ---
 
 ## Technical Details
+[Built with HTML, CSS, and JavaScript; uses script.js for navigation and app.js for manual bill calculation. Includes pages for meter scanning, manual entry, and appliance-wise usage tracking, helping users estimate bills and monitor energy consumption efficiently.]
 
 ### Technologies/Components Used
 
 **For Software:**
-- Languages used: [e.g., JavaScript, Python, Java]
-- Frameworks used: [e.g., React, Django, Spring Boot]
-- Libraries used: [e.g., axios, pandas, JUnit]
-- Tools used: [e.g., VS Code, Git, Docker]
-
-**For Hardware:**
-- Main components: [List main components]
-- Specifications: [Technical specifications]
-- Tools required: [List tools needed]
+- Languages used: [JavaScript, Java, html, CSS]
+- Libraries used: [Google fonts]
+- Tools used: [VS Code, Git, Web Browser]
 
 ---
 
 ## Features
 
 List the key features of your project:
-- Feature 1: [Description]
-- Feature 2: [Description]
-- Feature 3: [Description]
-- Feature 4: [Description]
+- Feature 1: [Meter Scanning: Automatically estimate electricity bills by scanning the meter.]
+- Feature 2: [Manual Entry: Enter electricity units manually and calculate the bill instantly.]
+- Feature 3: [Appliance Usage Tracking: Identify which appliances consume the most electricity.]
+- Feature 4: [Energy Saving Insights: Helps users reduce energy wastage and manage electricity efficiently]
 
 ---
 
 ## Implementation
+[The project uses HTML, CSS, and JavaScript to create a web app with pages for meter scanning, manual unit entry (with automatic bill calculation via app.js), and appliance-wise usage tracking, helping users monitor and manage electricity efficiently.]
 
-### For Software:
 
-#### Installation
-```bash
-[Installation commands - e.g., npm install, pip install -r requirements.txt]
-```
+#### Screenshots
 
-#### Run
-```bash
-[Run commands - e.g., npm start, python app.py]
-```
+![https://1drv.ms/i/c/621a4d1980988d71/IQDEe5WxKat7T5ZALCHoYecoAQULT_EHyHhNoT1SD_kpo64?e=0HXPrT](open interface)
 
-### For Hardware:
+![https://1drv.ms/i/c/621a4d1980988d71/IQD0rGkYYAxKS4-k6RbiHtbZASKO1pCp96yG7J1Nb96EPCE?e=2zRxQd](scan meter)
 
-#### Components Required
-[List all components needed with specifications]
+![https://1drv.ms/i/c/621a4d1980988d71/IQA41eCP5xjGQIYeb2_dIq8PAbiEgLUyGdnsOEPWikEuWyI?e=iPMSyx](manual entry)
 
-#### Circuit Setup
-[Explain how to set up the circuit]
+![https://1drv.ms/i/c/621a4d1980988d71/IQDy6DEKV6bHQJOxsGCpEWKGAVrehGgym9Y8wOb0FlLXd-E?e=9R8nhy](appliance usage)
 
----
-
-## Project Documentation
-
-### For Software:
-
-#### Screenshots (Add at least 3)
-
-![Screenshot1](Add screenshot 1 here with proper name)
-*Add caption explaining what this shows*
-
-![Screenshot2](Add screenshot 2 here with proper name)
-*Add caption explaining what this shows*
-
-![Screenshot3](Add screenshot 3 here with proper name)
-*Add caption explaining what this shows*
-
-#### Diagrams
-
-**System Architecture:**
-
-![Architecture Diagram](docs/architecture.png)
-*Explain your system architecture - components, data flow, tech stack interaction*
-
-**Application Workflow:**
-
-![Workflow](docs/workflow.png)
-*Add caption explaining your workflow*
-
----
-
-### For Hardware:
-
-#### Schematic & Circuit
-
-![Circuit](Add your circuit diagram here)
-*Add caption explaining connections*
-
-![Schematic](Add your schematic diagram here)
-*Add caption explaining the schematic*
-
-#### Build Photos
-
-![Team](Add photo of your team here)
-
-![Components](Add photo of your components here)
-*List out all components shown*
-
-![Build](Add photos of build process here)
-*Explain the build steps*
-
-![Final](Add photo of final product here)
-*Explain the final build*
-
----
-
-## Additional Documentation
-
-### For Web Projects with Backend:
-
-#### API Documentation
 
 **Base URL:** `https://api.yourproject.com`
 
