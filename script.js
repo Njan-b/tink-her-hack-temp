@@ -157,3 +157,18 @@ function clearHistory() {
 window.onload = function() {
     getLastReading();
 };
+
+// script.js
+
+function openScan() {
+    window.location.href = "scan.html";
+}
+
+function openManual() {
+    window.location.href = "manual.html";
+    // If you also want to load app.js, include it in manual.html
+}
+
+function openAppliance() {
+    window.location.href = "appliance.html";
+}
